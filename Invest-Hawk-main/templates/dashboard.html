@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: url('media/welcome.avif') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            width: 850px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px); /* Initial blur */
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+            margin-left: 22rem;
+            margin-top: -50px;
+        }
+        
+        /* Remove additional blur on hover */
+        .container:hover {
+            transform: scale(1.02);
+            backdrop-filter: none; /* Prevents additional blurring */
+        }
+        
+
+        
+        /* Title */
+        h1 {
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        /* Dashboard Content */
+        .dashboard-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            gap: 0.5rem;
+        }
+
+        /* Left & Right Sections */
+        .left-section, .right-section {
+            width: 48%;
+            padding: 20px;
+            border-radius: 10px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .left-section:hover, .right-section:hover {
+            transform: scale(1.05);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .description {
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        /* Toggle Switch */
+        .toggle-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #4e8dff;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        /* Input Field */
+        .input-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .right-section input {
+            width: 120px;
+            padding: 10px;
+            font-size: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            background: transparent;
+            color: white;
+        }
+
+        /* Save Button */
+        .button-container {
+            margin-top: 10px;
+        }
+
+        button {
+            background-color: #4e8dff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+            width: 20%;
+        }
+
+        button:hover {
+            background-color: #4e8dff;
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            body {
+                justify-content: center;
+            }
+            
+            .container {
+                width: 90%;
+                max-width: 500px;
+            }
+
+            .dashboard-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .left-section, .right-section {
+                width: auto;
+            }
+
+            button {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <h1>Trading Dashboard</h1>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            
+            <!-- Left Side: Trading Strategy -->
+            <div class="left-section">
+                <h2 class="section-title">Trading Strategy</h2>
+                <p class="description">Toggle to enable/disable automated trading strategy</p>
+                <div class="toggle-container">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="strategyToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Right Side: Trading Amount -->
+            <div class="right-section">
+                <h2 class="section-title">Trading Amount</h2>
+                <p class="description">Set the amount to be used for trading</p>
+                <div class="input-container">
+                    <input type="number" id="tradeAmount" placeholder="Enter amount" value="1000">
+                </div>
+            </div>
+        </div>
+
+        <!-- Save Button -->
+        <div class="button-container">
+            <button id="saveButton">Save Settings</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('saveButton').addEventListener('click', function() {
+            const isStrategyEnabled = document.getElementById('strategyToggle').checked;
+            const tradeAmount = document.getElementById('tradeAmount').value;
+
+            alert(`Settings saved! Strategy: ${isStrategyEnabled ? 'ON' : 'OFF'}, Amount: $${tradeAmount}`);
+            
+            anime({
+                targets: '#saveButton',
+                scale: [1, 1.2, 1],
+                duration: 500,
+                easing: 'easeInOutQuad'
+            });
+        });
+    </script>
+</body>
+</html>

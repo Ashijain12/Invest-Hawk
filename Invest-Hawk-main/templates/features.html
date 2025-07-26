@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvestHawk - Trading Strategy</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            height: 100vh;
+            background: url('media/welcome.avif') no-repeat center center fixed;
+            background-size: cover;
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
+        }
+        
+        header {
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .back-to-dashboard {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            transition: background 0.3s;
+        }
+        
+        .back-to-dashboard:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        h1 {
+            font-size: 2.5em;
+        }
+        
+        .feature-container {
+            overflow-y: auto;
+            height: 80vh;
+            padding: 20px;
+            width: 80%;
+        }
+        
+        .feature {
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .feature:hover {
+            transform: scale(1.05);
+        }
+        
+        footer {
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    
+    <header>
+        <a href="home.html" class="back-to-dashboard">Back to Home</a>
+        <h1>InvestHawk Trading Strategy</h1>
+        <p>Smart trading strategies for NSE F&O markets</p>
+    </header>
+    
+    <div class="feature-container">
+        <section class="feature" id="universe">
+            <h2>Universe</h2>
+            <p>We focus only on NSE F&O (Futures and Options) stocks, dynamically updating the list of eligible stocks daily.</p>
+        </section>
+        
+        <section class="feature" id="entry-criteria">
+            <h2>Entry Criteria</h2>
+            <ul>
+                <li>Enter a trade when a stock opens for trading after hitting a circuit limit.</li>
+                <li>Track stocks that resume trading after the circuit limit is hit.</li>
+                <li>If a stock breaks an upper circuit, enter a long position; if it breaks a lower circuit, enter a short position.</li>
+            </ul>
+        </section>
+        
+        <section class="feature" id="exit-criteria">
+            <h2>Exit Criteria</h2>
+            <ul>
+                <li>Exit when the stock reaches the next circuit limit (upper or lower).</li>
+                <li>Example: If entered at an upper circuit, exit at the next upper or lower circuit.</li>
+            </ul>
+        </section>
+        
+        <section class="feature" id="risk-management">
+            <h2>Risk Management</h2>
+            <ul>
+                <li>Limit exposure with adjustable client preferences.</li>
+                <li>Trail stop-losses at 0.30% when the stock jumps 1%.</li>
+                <li>Initial stop-loss set at 0.50%.</li>
+            </ul>
+        </section>
+        
+        <section class="feature" id="filters">
+            <h2>Filters & Constraints</h2>
+            <ul>
+                <li>Strategy operates only during market hours (9:15 AM - 3:30 PM).</li>
+                <li>Only intraday trading is allowed (MIS, not CNC).</li>
+            </ul>
+        </section>
+        
+        <section class="feature" id="execution">
+            <h2>Execution Logic</h2>
+            <ul>
+                <li>Monitor circuit limits in real-time.</li>
+                <li>Fetch circuit limit data and execute trades using Angel One API.</li>
+            </ul>
+        </section>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 InvestHawk. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

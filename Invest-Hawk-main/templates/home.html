@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InvestHawk</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    
+    body {
+      height: 100vh;
+      background: url('media/welcome.avif') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+    
+    .logo {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      text-decoration: underline;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      z-index: 10;
+    }
+    
+    .nav {
+      position: absolute;
+      top: 30px;
+      left: 50px;
+      z-index: 10;
+    }
+    
+    .nav a {
+      color: white;
+      text-decoration: none;
+      margin-right: 20px;
+      font-size: 16px;
+      transition: opacity 0.3s;
+    }
+    
+    .nav a:hover {
+      opacity: 0.8;
+    }
+    
+    .login-button {
+      background: #4e8dff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .login-button:hover {
+      background: #376fd1;
+    }
+    
+    .content {
+      width: 60%;
+      margin: auto;
+      text-align: center;
+      color: white;
+      z-index: 2;
+      padding: 0 20px;
+    }
+    
+    .title {
+      font-size: 70px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .quote {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .subtitle {
+      font-size: 17px;
+      max-width: 800px;
+      margin: 0 auto 30px;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    
+    .cta-primary {
+      background: #4e8dff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .cta-primary:hover {
+      background: #376fd1;
+    }
+    
+    .cta-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+      border-radius: 5px;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .cta-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  
+  <div class="logo">InvestHawk</div>
+  
+  <div class="nav">
+    <a href="features.html">Features</a>
+    <a href="login.html" class="login-button">Login</a>
+  </div>
+
+  <div class="content">
+    <h1 class="title">InvestHawk</h1>
+    <p class="quote">Invest Smarter, Trade Better!</p>
+    <p class="subtitle">Take control of your investments like never before. With InvestHawk, 
+        you can set your marketing budget, monitor over 199+ stocks from the NAC, and fine-tune 
+        your trading strategies — all in one place. Optimize your portfolio and make data-driven 
+        decisions with ease.</p>
+    
+    <div class="cta-buttons">
+      <button class="cta-primary" onclick="window.location.href='login.html'">Get Started</button>
+    </div>
+  </div>
+  
+  <script>
+    // Add any additional JavaScript functionality for the home page here
+  </script>
+</body>
+</html>

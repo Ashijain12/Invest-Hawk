@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - InvestHawk</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    
+    body {
+      height: 100vh;
+      background: url('media/welcome.avif') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+    
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 30px;
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      z-index: 10;
+      text-decoration: none;
+    }
+    
+    .container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      z-index: 2;
+    }
+    
+    .login-container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 30px;
+      width: 350px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+    
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: white;
+      font-size: 24px;
+    }
+    
+    .input-group {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 12px 15px;
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      border-radius: 5px;
+      color: white;
+      outline: none;
+    }
+    
+    .input-group input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .login-btn {
+      width: 100%;
+      padding: 12px;
+      background: #4e8dff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    
+    .login-btn:hover {
+      background: #376fd1;
+    }
+    
+    .login-footer {
+      margin-top: 20px;
+      text-align: center;
+      color: white;
+      font-size: 14px;
+    }
+    
+    .login-footer a {
+      color: #4e8dff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    .login-footer a:hover {
+      text-decoration: underline;
+    }
+    
+    .home-link {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      color: white;
+      text-decoration: none;
+      z-index: 10;
+    }
+    
+    /* Signup Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 30px;
+      width: 400px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+    }
+    
+    .modal.active .modal-content {
+      transform: translateY(0);
+    }
+    
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    
+    .signup-btn {
+      width: 100%;
+      padding: 12px;
+      background: #4e8dff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+    
+    .signup-btn:hover {
+      background: #376fd1;
+    }
+    
+    .modal-footer {
+      margin-top: 20px;
+      text-align: center;
+      color: white;
+      font-size: 14px;
+    }
+    
+    .modal-footer a {
+      color: #4e8dff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    .modal-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  
+  <a href="home.html" class="logo">InvestHawk</a>
+  <a href="home.html" class="home-link">Back to Home</a>
+
+  <div class="container">
+    <div class="login-container">
+      <h2>Login</h2>
+      <div class="input-group">
+        <input type="text" placeholder="Username">
+      </div>
+      <div class="input-group">
+        <input type="password" placeholder="Password">
+      </div>
+      <button class="login-btn" onclick="redirectToDashboard()">Login</button>
+      <div class="login-footer">
+        Don't have an account? <a id="signup-link">Sign up</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Signup Modal -->
+  <div class="modal" id="signup-modal">
+    <div class="close-btn">&times;</div>
+    <div class="modal-content">
+      <h2>Create Account</h2>
+      <div class="input-group">
+        <input type="text" placeholder="Full Name">
+      </div>
+      <div class="input-group">
+        <input type="email" placeholder="Email">
+      </div>
+      <div class="input-group">
+        <input type="text" placeholder="Username">
+      </div>
+      <div class="input-group">
+        <input type="password" placeholder="Password">
+      </div>
+      <div class="input-group">
+        <input type="password" placeholder="Confirm Password">
+      </div>
+      <button class="signup-btn">Sign Up</button>
+      <div class="modal-footer">
+        Already have an account? <a id="login-link">Login</a>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Get DOM elements
+    const signupLink = document.getElementById('signup-link');
+    const loginLink = document.getElementById('login-link');
+    const signupModal = document.getElementById('signup-modal');
+    const closeBtn = document.querySelector('.close-btn');
+    
+    // Open signup modal
+    signupLink.addEventListener('click', function() {
+      signupModal.classList.add('active');
+    });
+    
+    // Close signup modal
+    closeBtn.addEventListener('click', function() {
+      signupModal.classList.remove('active');
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', function(event) {
+      if (event.target === signupModal) {
+        signupModal.classList.remove('active');
+      }
+    });
+    
+    // Switch back to login
+    loginLink.addEventListener('click', function() {
+      signupModal.classList.remove('active');
+    });
+    
+    function redirectToDashboard() {
+      window.location.href = "dashboard.html"; // Redirect to dashboard.html
+    }
+  </script>
+</body>
+</html>
